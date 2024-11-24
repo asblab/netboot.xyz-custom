@@ -3,10 +3,20 @@
 ### netboot.xyz-custom menu
 ###
 
-:start
-echo Hello world!
-sleep 10
-goto custom_exit
+#:start
+#echo Hello world!
+#sleep 10
+#goto custom_exit
 
-:custom_exit
-exit 0
+#:custom_exit
+#exit 0
+
+:start
+imgfree
+kernel http://ftp.debian.org/debian/dists/bookworm/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux auto=true priority=critical preseed/url=https://home.ttic.edu/~asb/ps.cfg interface=eno1 initrd=initrd.magic
+initrd http://ftp.debian.org/debian/dists/bookworm/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
+echo
+echo MD5sums:
+md5sum linux initrd.gz
+boot
+
